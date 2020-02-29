@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: adminer-pvc
+spec:
+  storageClassName: cloud-ssd-4
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 7Gi
+---
+# Implementetion
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cloud-ssd-4
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+
