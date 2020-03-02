@@ -6,7 +6,8 @@ metadata:
   labels:
     app: adminer
 spec:
-  type: LoadBalancer
+  type: ClusterIP
+  sessionAffinity: ClientIP 
   selector:
     app: adminer
     tier: frontend

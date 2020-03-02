@@ -3,12 +3,16 @@ kind: Ingress
 metadata:
   name: ingress-canary
   annotations:
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800" 
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: a98bb5bae5c21414fa80d0f430be5b75-1b82279e9da2d159.elb.us-east-2.amazonaws.com
+  - host: aaea976a5d1c642468785871bfd3d621-7191cea1ac28f944.elb.us-east-2.amazonaws.com
     http:
       paths:
         - path: /adminer
