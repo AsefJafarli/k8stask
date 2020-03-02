@@ -13,12 +13,12 @@ spec:
         app: postgres
     spec:
       initContainers:
-        - name: busybox
-          image: busybox:latest
-          args: ["rm", "-rf", "/var/lib/postgresql/data/lost+found"]
-          volumeMounts:
-            - name: postgres-persistent-storage
-              mountPath: /var/lib/postgresql/data
+      - name: busybox
+        image: busybox:latest
+        args: ["rm", "-rf", "/var/lib/postgresql/data/lost+found"]
+        volumeMounts:
+          - name: postgres-persistent-storage
+            mountPath: /var/lib/postgresql/data
       containers:
       - name: postgres
         image: postgres

@@ -8,10 +8,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: a164146c5b1e640e69b9914dd8a307ac-c24c1c9113e68c9a.elb.us-east-2.amazonaws.com
+  - host: a98bb5bae5c21414fa80d0f430be5b75-1b82279e9da2d159.elb.us-east-2.amazonaws.com
     http:
       paths:
-        - path: /dashboard
+        - path: /adminer
           backend:
-            serviceName: kubernetes-dashboard
-            servicePort: 8443
+            serviceName: adminer
+            servicePort: 80

@@ -9,6 +9,9 @@ spec:
   type: LoadBalancer
   selector:
     app: adminer
+    tier: frontend
+    track: canary
+
   ports:
     - port: 80
       targetPort: 8080

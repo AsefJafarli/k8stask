@@ -1,0 +1,47 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: my-postgres-backup
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: database-backup
+            image: asafjafarli/postgresbackup:v4
+            imagePullPolicy: Always
+            env:
+              - name: AWS_ACCESS_KEY_ID
+                value: AKIAQ643TFZMCQECM7QO
+              - name: AWS_SECRET_ACCESS_KEY
+                valueFrom:
+                   secretKeyRef:
+                     name: database-backup-psg
+                     key: aws_secret_access_key
+              - name: AWS_DEFAULT_REGION
+                value: "us-east-2"
+              - name: AWS_BUCKET_NAME
+                value: "asef-backups"
+              - name: AWS_BUCKET_BACKUP_PATH
+                value: "/postgresql"
+              - name: TARGET_DATABASE_HOST
+                value: "ktask-postgres"
+              - name: TARGET_DATABASE_PORT
+                value: "5432"
+              - name: TARGET_DATABASE_NAMES
+                value: "postgres"
+              - name: TARGET_DATABASE_USER
+                value: "root"
+              - name: PGPASSWORD
+                valueFrom:
+                   secretKeyRef:
+                     name: database-backup-psg
+                     key: database_password
+              - name: BACKUP_TIMESTAMP
+                value: "_%Y_%m_%d"
+              - name: SLACK_ENABLED
+                value: "false"
+          restartPolicy: Never

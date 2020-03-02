@@ -5,15 +5,22 @@ metadata:
   name: adminer
   labels:
     app: adminer
+    tier: frontend
+    track: canary
+
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: adminer
+      tier: frontend
+      track: canary
   template:
     metadata:
       labels:
         app: adminer
+        tier: frontend
+        track: canary
     spec:
       containers:
         - name: adminer
